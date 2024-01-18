@@ -74,3 +74,4 @@ int main()
     cout<<maxi<<" ";
     return 0;
 }
+o/p=6
