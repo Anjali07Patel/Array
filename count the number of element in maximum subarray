@@ -1,0 +1,76 @@
+/*TC=O(N*N*N)
+SC=O(1)
+brute force*/
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[]={-2,1,-3,4,-1,2,1,-5,4};
+    int maxi=INT_MIN;
+    
+    for(int i=0;i<8;i++)
+    {
+        for(int j=i;j<8;j++)
+        {
+            int sum=0;
+            for(int k=i;k<j;k++)
+            {
+                sum=sum+arr[k];
+                maxi=max(maxi,sum);
+            }
+        }
+    }
+    cout<<maxi<<" ";
+    return 0;
+}
+
+
+/*
+Tc=O(N*N)
+SC=O(1)
+better*/
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[]={-2,1,-3,4,-1,2,1,-5,4};
+    int maxi=INT_MIN;
+    
+    for(int i=0;i<8;i++)
+    {
+        int sum=0;
+        for(int j=i;j<8;j++)
+        {
+                sum=sum+arr[j];
+                maxi=max(maxi,sum);
+        }
+    }
+    cout<<maxi<<" ";
+    return 0;
+}
+
+TC=O(N)
+SC=O(1)
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[]={-2,1,-3,4,-1,2,1,-5,4};
+    int maxi=INT_MIN;
+    int sum=0;
+    for(int i=0;i<8;i++)
+    {
+        sum=sum+arr[i];
+        if(sum>maxi)
+        {
+            maxi=sum;
+        }
+        if(sum<0)
+        {
+            sum=0;
+        }
+    }
+    cout<<maxi<<" ";
+    return 0;
+}
