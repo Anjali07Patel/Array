@@ -1,0 +1,32 @@
+brute
+o(n*n)
+o(1)
+
+int maxProfit(vector<int>& prices) {
+        int ans=0;
+        for(int i=0;i<prices.size();i++)
+        {
+            for(int j=i+1;j<prices.size();j++)
+            {
+                int temp=prices[j]-prices[i];
+                ans=max(ans,temp);
+            }
+        }
+        return ans;
+    }
+
+// optimal
+o(n)
+o(1)
+ int maxProfit(vector<int>& arr) {
+        int ans=0;
+        int mini=arr[0];
+        for(int i=0;i<arr.size();i++)
+        {
+            int temp=arr[i]-mini;
+            ans=max(ans,temp);
+            mini=min(mini,arr[i]);
+            
+        }
+        return ans;
+    }
