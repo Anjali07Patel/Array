@@ -1,0 +1,70 @@
+brute force
+o(n*n*n)
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[]={1,2,3,-3,1,1,1,4,2,-3};
+    int k=3;
+    int count=0;
+    for(int i=0;i<10;i++)
+    {
+        for(int j=i;j<10;j++)
+        {
+          int sum=0;
+           for(int k=i;k<=j;k++)
+           {
+               sum=sum+arr[k];
+           }
+           if(sum==k)
+           {
+               count++;
+           }
+        }
+    }
+    cout<<count;
+    return 0;
+}
+
+//better
+o(n*n)
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[]={1,2,3,-3,1,1,1,4,2,-3};
+    int k=3;
+    int count=0;
+    for(int i=0;i<10;i++)
+    {
+        int sum=0;
+        for(int j=i;j<10;j++)
+        {
+          sum=sum+arr[j];
+        
+        if(sum==k)
+        {
+            count++;
+        }
+        }
+    }
+    cout<<count;
+    return 0;
+}
+// optimal
+o(n)
+O(n)
+int subarraySum(vector<int>& nums, int k) {
+        map<int,int>mp;
+        int count=0;
+        mp[0]=1;
+        int sum=0;
+        for(int i=0;i<nums.size();i++)
+        {
+             sum=sum+nums[i];
+            int remove=sum-k;
+            count=count+mp[remove];
+            mp[sum]++;
+        }
+        return count;
+    }
