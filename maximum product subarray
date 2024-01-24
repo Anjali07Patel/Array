@@ -1,0 +1,97 @@
+brute force
+o(n*n*n)
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[]={2,3,-2,4};
+    int ans=0;
+    int prod;
+    for(int i=0;i<4;i++)
+    {
+        for(int j=i+1;j<4;j++)
+        {
+            int prod=1;
+            for(int k=i;k<=j;k++)
+            {
+                prod=prod*arr[k];
+            }
+            ans=max(ans,prod);
+        }
+    }
+    cout<<ans;
+    return 0;
+}
+o/p=6
+
+//better
+o(n*n)
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[]={2,3,-2,4};
+    int ans=0;
+    int prod;
+    for(int i=0;i<4;i++)
+    {
+        int prod=1;
+        for(int j=i;j<4;j++)
+        {
+            prod=prod*arr[j];
+            ans=max(ans,prod);
+        }
+    }
+    cout<<ans;
+    return 0;
+}
+
+//optimal
+o(n)
+int maxProduct(vector<int>& nums) {
+        int ans=INT_MIN;
+        int prod=1;
+        for(int i=0;i<nums.size();i++)
+        {
+            prod=prod*nums[i];
+            ans=max(prod,ans);
+            if(prod==0)
+            {
+                prod=1;
+            }
+        }
+        prod=1;
+        for(int i=nums.size()-1;i>=0;i--)
+        {
+            prod=prod*nums[i];
+            ans=max(ans,prod);
+            if(prod==0)
+            {
+                prod=1;
+            }
+        }
+        return ans;
+    }
+
+//using single for loop
+int maxProduct(vector<int>& nums) {
+        int ans=INT_MIN;
+        int pref=1;
+        int suff=1;
+        int n=nums.size();
+        for(int i=0;i<nums.size();i++)
+        {
+            if(suff==0)
+            {
+                suff=1;
+            }
+            if(pref==0)
+            {
+                pref=1;
+            }
+            pref=pref*nums[i];
+            suff=suff*nums[n-i-1];
+            ans=max(ans,max(pref,suff));
+        }
+        return ans;
+    }
