@@ -1,0 +1,88 @@
+brute force
+o(n*n)
+#include<iostream>
+using namespace std;
+bool solve(int arr[],int num)
+{
+    for(int i=0;i<10;i++)
+    {
+        if(arr[i]==num)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+int main()
+{
+    int arr[]={0,3,7,2,5,8,4,6,0,1};
+    int ans=1;
+    for(int i=0;i<10;i++)
+    {
+        int x=arr[i];
+        int count=1;
+        while(solve(arr,x+1)==true)
+        {
+            x=x+1;
+            count=count+1;
+        }
+        ans=max(ans,count);
+    }
+    cout<<ans;
+    return 0;
+}
+
+//better approach
+o(nlong n)+o(n)
+int longestConsecutive(vector<int>& nums) 
+{
+        int leftSmaller=INT_MIN;
+        sort(nums.begin(),nums.end());
+        int ans=1;
+        int count=0;
+        if (nums.size() == 0) return 0;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]-1==leftSmaller)
+            {
+                count++;
+                leftSmaller=nums[i];
+            }
+            else if(nums[i]!=leftSmaller)
+            {
+                count=1;
+                leftSmaller=nums[i];
+            }
+            ans=max(ans,count);
+        }
+        return ans;
+     }
+
+//optimal approach
+ int longestConsecutive(vector<int>& a) {
+         int n = a.size();
+    if (n == 0) return 0;
+
+    int longest = 1;
+    unordered_set<int> st;
+    for (int i = 0; i < n; i++) 
+    {
+        st.insert(a[i]);
+    }
+
+    for (auto it : st) 
+    {
+        if (st.find(it - 1) == st.end())
+        {
+            int cnt = 1;
+            int x = it;
+            while (st.find(x + 1) != st.end()) 
+            {
+                x = x + 1;
+                cnt = cnt + 1;
+            }
+            longest = max(longest, cnt);
+        }
+    }
+    return longest;
+    }
