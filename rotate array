@@ -1,0 +1,32 @@
+o(k)+o(n-k)+o(n)=o(2n)
+void reverse(vector<int>&nums,int start,int end)
+    {
+        while(start<end)
+        {
+            int temp=nums[start];
+            nums[start]=nums[end];
+            nums[end]=temp;
+            start++;
+            end--;
+        }
+    }
+    void rotate(vector<int>& nums, int k) {
+       if(nums.size()==1)
+       {
+           return ;
+       }
+       k=k%nums.size();
+       reverse(nums,0,nums.size()-k-1);
+       reverse(nums,0,nums.size()-1);
+       reverse(nums,0,k-1);
+    }
+
+//optimal
+void rotate(vector<int>& nums, int k) {
+        vector<int>ans(nums.size());
+        for(int i=0;i<nums.size();i++)
+        {
+            ans[(i+k)%nums.size()]=nums[i];
+        }
+        nums=ans;
+    }
