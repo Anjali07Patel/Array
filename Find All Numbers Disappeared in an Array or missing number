@@ -1,0 +1,67 @@
+brute force
+o(n*n)
+o(1)
+ vector<int> findDisappearedNumbers(vector<int>& nums) {
+        vector<int>ans;
+        for(int i=1;i<=nums.size();i++)
+        {
+            int temp=i;
+            bool found=false;
+            for(int j=0;j<nums.size();j++)
+            {
+                if(nums[j]==temp)
+                {
+                    found=true;
+                }
+            }
+            if(!found)
+            {
+                ans.push_back(temp);
+            }
+        }
+        return ans;
+    }
+
+better
+o(n)
+o(n)
+vector<int> findDisappearedNumbers(vector<int>& nums) {
+        vector<int>ans;
+        set<int>st;
+        for(int i=0;i<nums.size();i++)
+        {
+            st.insert(nums[i]);
+        }
+        int a=1;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(st.find(a)==st.end())
+            {
+                ans.push_back(a);
+            }
+            a++;
+        }
+        return ans;
+    }
+otpimal
+o(n)
+o(1)
+vector<int> findDisappearedNumbers(vector<int>& nums) {
+        vector<int>ans;
+        for(int i=0;i<nums.size();i++)
+        {
+            int temp=abs(nums[i])-1;
+            if(nums[temp]>0)
+            {
+                nums[temp]=nums[temp]*-1;
+            }
+        }
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]>0)
+            {
+                ans.push_back(i+1);
+            }
+        }
+        return ans;
+    }
