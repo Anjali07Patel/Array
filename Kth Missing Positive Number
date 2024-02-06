@@ -1,0 +1,59 @@
+brute force
+o(n)
+o(1)
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[]={2,3,4,7,11};
+    int k=5;
+    int n=sizeof(arr)/sizeof(arr[0]);
+   for(int i=0;i<n;i++)
+   {
+       if(arr[i]<k)
+       {
+           k++;
+       }
+       else
+       {
+           break;
+       }
+   }
+   cout<<k;
+    return 0;
+    
+}
+
+optimal
+o(logn)
+o(1)
+#include<iostream>
+using namespace std;
+int solve(int arr[],int k,int n)
+{
+    int s=0;
+    int e=n-1;
+    while(s<=e)
+    {
+        int mid=s+(e-s)/2;
+        int missing=arr[mid]-(mid+1);
+        if(missing <k)
+        {
+            s=mid+1;
+        }
+        else
+        {
+            e=mid-1;
+        }
+    }
+    return e+k+1;
+}
+int main()
+{
+    int arr[]=2,3,4,7,11};
+    int k=5;
+    int n=sizeof(arr)/sizeof(arr[0]);
+    cout<<solve(arr,k,n);
+    return 0;
+    
+}
