@@ -1,0 +1,67 @@
+brute force 
+o(nlogn)->for sorting + o(n) ->for loop
+o(1)
+int firstMissingPositive(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int ans=1;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]>0 && ans==nums[i])
+            {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+better
+using set
+o(n)
+o(n)
+
+int firstMissingPositive(vector<int>& nums) {
+        set<int>st;
+        for(int i=0;i<nums.size();i++)
+        {
+            st.insert(nums[i]);
+        }
+        int ans=1;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(st.find(ans)!=st.end())
+            {
+                ans++;
+            }
+        }
+        return ans;
+        
+    }
+
+
+optimal
+o(n)
+o(1)
+int firstMissingPositive(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++)
+        {
+            int  element =nums[i];
+            
+            if(element>=1 && element<=nums.size())
+            {
+                int  chair = element-1;
+                if(nums[chair]!=element)
+                {
+                    swap(nums[chair],nums[i]);
+                    i--;
+                }
+            }
+        }
+        for(int i=0;i<nums.size();i++)
+        {
+            if(i+1!= nums[i])
+            {
+                return i+1;
+            }
+        }
+        return nums.size()+1;
+    }
